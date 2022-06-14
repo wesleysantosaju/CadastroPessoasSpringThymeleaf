@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Atualizar Pessoa</title>
+</head>
+<body>
+<h1 align="center">Atualizar Dados</h1>
+<hr>
+        <!-- FORM QUE CHAMA O UPDATE DA NOSSA CONTROLLER PARA ALTERAR USUÁRIOS PELO ID -->
+        <form action="#" th:action="@{/update/{id}(id=${user.id})}" th:object="${user}" method="post">
+            <label for="nome">Nome: </label>
+            <input type="text" th:field="*{nome}" id="nome" placeholder="Nome">
+            <br>
+            <br>
+            <label for="idade">Idade: </label>
+            <input type="text" th:field="*{idade}" id="idade" placeholder="Idade">
+            <br>
+            <br>
+            <input type="submit" value="Atualizar Pessoa">
+        </form>
+</body>
+</html>

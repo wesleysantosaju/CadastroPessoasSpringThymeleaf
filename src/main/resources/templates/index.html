@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro de Pessoas - Lista</title>
+</head>
+<body>
+    <!-- CRIANDO UM SWITCH CASE PARA VERIFICAR A EXISTÊNCIA DE USUÁRIOS -->
+    <!-- CASO NÃO EXISTA USUÁRIOS CADASTRADOS, EXIBE UM H2 INDICANDO QUE NÃO EXISTEM USUÁRIOS CADASTRADOS -->
+    <div th:switch="${users}">
+        <h2 th:case="null" align="center">
+            Nenhum usuário cadastrado!
+        </h2>
+        <!-- CASO EXISTA REGISTROS, LISTAR OS REGISTROS EXISTENTES EM UMA TABELA -->
+        <div th:case="*">
+            <h1 align="center">Pessoas Cadastradas</h1>
+            <hr>
+            <table border="1px" align="center">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Editar</th>
+                    <th>Deletar</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- LOOP PARA PERCORRER OS REGISTROS ENCONTRADOS -->
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.nome}"></td>
+                    <td th:text="${user.idade}"></td>
+                    <!-- PEGANDO OS IDS DOS USUÁRIOS POR LINHA PARA QUE OS BOTÕES EXECUTEM AÇÕES -->
+                    <!-- ISSO FAZ COM QUE A CADA LINHA SEJA CAPTURADO O ID PARA ACESSAR O ENDEREÇO RELACIONADO A CADA ID
+                    DE USUÁRIO, EX: LOCALHOST:8080/EDIT/1, PARA O USUÁRIO DE ID 1, E ASSIM SUCESSIVAMENTE -->
+                    <td><a th:href="@{/edit/{id}(id=${user.id})}">Editar</a></td>
+                    <td><a th:href="@{/delete/{id}(id=${user.id})}">Deletar</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+<p align="center"><a href="/signup">Adicionar uma nova pessoa</a></p>
+</body>
+</html>
