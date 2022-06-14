@@ -1,12 +1,16 @@
 package com.example.th.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "pessoas")
+@Document(collection = "pessoas")
 public class Pessoa{
+
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column(name = "nome")
     private String nome;

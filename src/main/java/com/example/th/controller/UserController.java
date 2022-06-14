@@ -1,7 +1,9 @@
 package com.example.th.controller;
 
+import com.example.th.service.SequenceGeneratorService;
 import com.example.th.model.Pessoa;
 import com.example.th.repositories.PessoaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,9 @@ public class UserController {
 
     //injeção de dependência
     private final PessoaRepository pessoaRepository;
+
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
 
     //construtor
     public UserController(PessoaRepository pessoaRepository) {
@@ -48,6 +53,7 @@ public class UserController {
             return "add-user";
         }
 
+        pessoa.setId(sequenceGeneratorService.generateSequence(Pessoa.SEQUENCE_NAME));
         pessoaRepository.save(pessoa);
         return "redirect:/index";
     }
